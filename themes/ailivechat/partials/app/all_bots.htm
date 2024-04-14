@@ -1,0 +1,90 @@
+<style>
+.card-body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px; /* Adjust padding as necessary */
+    border: none; /* Remove borders as per your request */
+    background: #FFFFFF; /* Adjust background color as needed */
+}
+
+.card-header a:hover {
+    color: var(--prime-ten); 
+}
+
+.card-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%; /* Ensure content takes full width of the card body */
+}
+
+.card-item {
+    text-align: left; /* Align text to the left */
+    flex-basis: calc(33.333% - 10px); /* Adjust width of each item, subtracting the divider width */
+}
+
+.card-item h5 {
+    margin-bottom: 0; 
+    font-size: 14px; 
+}
+
+.card-item p {
+    font-size: 32px; 
+    margin-bottom: 0; 
+}
+
+.divider {
+    width: 1px; 
+    background-color: #DADADA; 
+    margin: 0 10px; 
+    height: 100px;
+    max-height: 140px;
+}
+
+@media (max-width: 768px) {
+    .card-body {
+        flex-direction: column;
+    }
+    .card-content {
+        flex-direction: column;
+    }
+    .divider {
+        width: 80%; 
+        height: 1px; 
+        margin: 10px auto; 
+    }
+    .card-item {
+        text-align: center; 
+        flex-basis: auto; 
+    }
+}
+</style>
+{% for bot in bots %}
+<div class="col-md-4 mb-30">
+   <div class="card">
+    <h5 class="card-header">
+        <a href="{{'app/mybot'|page({ bot_id: bot.bot_id })}}">{{bot.website}}</a>
+    </h5>
+    <div class="card-body">
+        <div class="card-content">
+            <div class="card-item">
+                <h5>Total<br>Pages</h5>
+                <p>{{bot.total_pages}}</p>
+            </div>
+            <div class="divider"></div>
+            <div class="card-item">
+                <h5>Crawl<br>Duration</h5>
+                <p>{{bot.duration|round}}s</p>
+            </div>
+            <div class="divider"></div>
+            <div class="card-item">
+                <h5>Total<br>Characters</h5>
+                <p>{{bot.crawl_data|length}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+{% endfor %}

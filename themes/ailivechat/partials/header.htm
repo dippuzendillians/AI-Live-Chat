@@ -1,0 +1,62 @@
+<style>
+.theme-main-menu .contact-btn-three{
+	background: #000000;
+}
+.theme-main-menu .login-btn-one{
+	color: #fff;
+}
+.theme-main-menu .login-btn-one:hover {
+    background: none;
+    color: #fff;
+}
+.theme-main-menu .contact-btn-three:hover {
+    background: black;
+    color: #fff;
+}
+</style>
+<header class="theme-main-menu sticky-menu theme-menu-three white-vr">
+				<div class="inner-content position-relative">
+					<div class="d-flex align-items-center justify-content-between">
+						<div class="logo order-lg-0"><a href="{{'home'|page}}" class="d-block"><img src="{{'assets/images/logo/logo_02.png'|theme}}" alt="" width="95"></a></div>
+
+						<div class="right-widget d-flex align-items-center ms-auto ms-lg-0 order-lg-3">
+                            {% if user %}
+                            <a href="javascript:void(0)" data-request="onLogout" data-request-data="redirect: '/'">Logout</a>
+							<a href="/dashboard" class="contact-btn-three fs-17 fw-500 tran3s d-none d-lg-block">Get Started</a>
+                            {% else %}
+                        	<a href="/login" class="login-btn-one fs-17 fw-500 tran3s me-3">Login</a>
+							<a href="/signup" class="contact-btn-three fs-17 fw-500 tran3s d-none d-lg-block">Get Started</a>
+                        {% endif %}
+						</div>
+
+						<nav class="navbar navbar-expand-lg order-lg-2">
+							<button class="navbar-toggler d-block d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+						    	<span></span>
+						 	</button>
+						    <div class="collapse navbar-collapse" id="navbarNav">
+						    	<ul class="navbar-nav">
+						    		<li class="d-block d-lg-none"><div class="logo"><a href="#" class="d-block"><img src="{{'assets/images/logo/logo_01.png'|theme}}" alt="" width="95"></a></div></li>
+							        <li class="nav-item active">
+							        	<a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Home</a>
+						            </li>
+									<li class="nav-item">
+							        	<a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">How It Works</a>
+						            </li>
+									<li class="nav-item">
+							        	<a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Use Cases</a>
+						            </li>
+									<li class="nav-item">
+							        	<a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Contact Us</a>
+						            </li>
+						    	</ul>
+						    	<!-- Mobile Content -->
+						    	<div class="mobile-content d-block d-lg-none">
+						    		<div class="d-flex flex-column align-items-center justify-content-center mt-70">
+						    			<a href="#" class="contact-btn-two fs-17 fw-500 tran3s">Contact us</a>
+						    		</div>
+						    	</div> <!-- /.mobile-content -->
+						    </div>
+						</nav>
+					</div>
+				</div> <!-- /.inner-content -->
+			</header> <!-- /.theme-main-menu -->

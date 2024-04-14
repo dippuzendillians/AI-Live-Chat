@@ -1,0 +1,19 @@
+==
+<!DOCTYPE html>
+<html lang="en">
+	{% partial "meta" %}
+	<body class="d-flex flex-column min-vh-100">
+		<div class="main-page-wrapper flex-grow-1">
+				{% partial "preloader"%}
+            
+				{% partial "app/header" %}
+           
+			{% page %}
+
+            
+    	{% partial "scripts" %}
+        {% framework %}
+        {% framework extras %}
+		</div>
+	</body>
+</html>

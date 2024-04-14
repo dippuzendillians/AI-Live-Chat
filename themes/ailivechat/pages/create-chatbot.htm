@@ -1,0 +1,82 @@
+url = "/create-chatbot"
+layout = "default"
+title = "Create a chatbot"
+
+[session]
+security = "user"
+redirect = "app/login"
+checkToken = 0
+==
+<style>
+/* Toast CSS */
+.toast {
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #caf2d8;
+    color: #469165;
+    padding: 15px 20px;
+    border-radius: 5px;
+    z-index: 1000;
+}
+
+.toast.show {
+    display: block;
+    animation: fadeOut 3s ease;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { opacity: 0; }
+}
+</style>
+<div class="container mt-150">
+	<div class="row">
+	  <div class="embed-modal">
+          <div class="embed-modal-header">
+            <h4>Embed Options</h4>
+          </div>
+          <div class="embed-modal-body">
+            <div class="embed-code">
+            <pre><code>&lt;script src="{{ 'assets/js/chatbot.js'|theme }}" data-param="2"  defer&gt;&lt;/script&gt;</code></pre>
+              <button class="copy-btn" onclick="copyEmbed()">Copy embed</button>
+               <div class="toast" id="toast">Embed code copied to clipboard!</div>
+            </div>
+          </div>
+        </div>
+ 
+   </div>
+</div>
+
+<script>
+function copyEmbed() {
+    const embedCode = document.querySelector('.embed-code');
+    const codeToCopy = embedCode.querySelector('code').innerText;
+
+    // Create a temporary textarea element to copy the code
+    const tempTextarea = document.createElement('textarea');
+    tempTextarea.value = codeToCopy;
+    document.body.appendChild(tempTextarea);
+
+    // Select the text within the textarea
+    tempTextarea.select();
+    document.execCommand('copy');
+
+    // Remove the temporary textarea
+    document.body.removeChild(tempTextarea);
+
+    // Show the toast
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+  
+    // Hide the toast after 3 seconds
+    setTimeout(function(){
+      toast.classList.remove('show');
+    }, 3000);
+}
+
+</script>
+
+<script src="{{ 'assets/js/chatbot.js'|theme }}"></script>`

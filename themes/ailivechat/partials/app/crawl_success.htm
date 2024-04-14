@@ -1,0 +1,59 @@
+[viewBag]
+==
+<?php
+use Dippuzen\Bots\Models\Bot;
+
+function onStart(){
+    $botId = Session::get('botId');
+    $item = Bot::where('bot_id', $botId)->first();
+    $this['pages']=$item->total_pages;
+    $this['duration']=$item->duration;
+    $this['characters']=strlen($item->crawl_data);
+    $this['website']=$item->website;
+    $this['botid']=$botId;
+    $botId = Session::forget('botId');
+
+}
+?>
+==
+<div class="row text-center d-flex justify-content-center pt-150" style="background: #F6F9FB;">
+      <div class="col-lg-6 wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+        <h3 class="fw-bold" style="font-size:40px">{{website}}</h3>
+
+        <p class="fs-12 fw-500">Your website has been crawled successfully.</p>
+      </div>
+    </div>
+    <div class="user-data-section d-flex align-items-center justify-content-center flex-column position-relative">
+      <div id="content">
+        <div class="form-wrapper position-relative m-auto"> <div class="row">
+        <div class="col-md-4 mx-auto mb-15">
+            <div class="bg-white shadow-sm rounded-3 p-6">
+                <div class="text-center p-10">
+                    <h5 class="mb-3 fs-20 text-left">Total<br>Pages</h5>
+                    <p class="display-4 mb-0 text-left">{{pages}}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mx-auto mb-15">
+            <div class="bg-white shadow-sm rounded-3 p-6">
+                <div class="text-center p-10">
+                    <h5 class="mb-3 fs-20 text-left">Crawl<br>Duration</h5>
+                    <p class="display-4 mb-0 text-left">{{duration}}s</p>
+                </div>
+            </div>
+        </div><div class="col-md-4 mx-auto mb-15">
+            <div class="bg-white shadow-sm rounded-3 p-6">
+                <div class="text-center p-10">
+                    <h5 class="mb-3 fs-20 text-left">Total<br>Characters</h5>
+                    <p class="display-4 mb-0 text-left">{{characters}}</p>
+                </div>
+            </div>
+        </div>
+<a href="{{'app/mybot'|page({ bot_id: botid })}}" type="submit" class="btn-twentyTwo w-100 fw-500 tran3s text-uppercase text-center">Proceed</a>
+    </div> </div>
+      </div> 
+        {% partial "app/footer" %} 
+        <img src="{{'assets/images/assets/ils_11.png'|theme}}" alt="" class="lazy-img illustration-one wow fadeInRight" style="visibility: hidden; animation-name: none;">
+        <img src="{{'assets/images/assets/ils_12.png'|theme}}" alt="" class="lazy-img illustration-two wow fadeInLeft" style="visibility: hidden; animation-name: none;">
+     </div>

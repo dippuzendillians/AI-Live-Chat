@@ -1,0 +1,28 @@
+fields:
+    website:
+        label: Website
+        span: auto
+        type: text
+    user_id:
+        label: 'User ID'
+        span: left
+        readOnly: 0
+        type: text
+    bot_id:
+        label: 'Bot ID'
+        span: auto
+        readOnly: 0
+        type: text
+    total_pages:
+        label: 'Total Pages'
+        span: auto
+        type: number
+    duration:
+        label: 'Crawling Duration'
+        span: auto
+        type: text
+    crawl_data:
+        label: 'Crawled Data'
+        size: huge
+        span: full
+        type: textarea

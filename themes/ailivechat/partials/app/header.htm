@@ -1,0 +1,16 @@
+<header class="theme-main-menu sticky-menu theme-menu-eight">
+	<div class="inner-content position-relative">
+		<div class="d-flex align-items-center justify-content-between">
+			<div class="logo order-lg-0"><a href="{{'home'|page}}" class="d-block"><img src="{{'assets/images/logo/logo_01.png'|theme}}" alt="" width="75"></a></div>
+			{% if this.page.id == "login" or this.page.id == "signup" %}
+            <a href="/" class="go-back-btn fw-500 tran3s">Go to home</a>
+            {% else %}
+            {% if user %}
+                <p><a href="javascript:void(0)" data-request="onLogout" data-request-data="redirect: '/'" class="go-back-btn fw-500 tran3s">Logout</a></p>
+                {% else %}
+            	<a class="nav-link-contact" href="/contact" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Contact Us</a>
+            {% endif %}
+            {% endif %}
+		</div>
+	</div>
+</header>

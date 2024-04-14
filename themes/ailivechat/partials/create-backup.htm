@@ -1,0 +1,49 @@
+<style>
+  .fs-12 {
+    font-size: 12px;
+  }
+
+  .user-data-section {
+    background: unset;
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  .user-data-section .form-wrapper:before {
+    content: unset;
+  }
+
+  .user-data-section .form-wrapper {
+    padding: 0px 70px 60px;
+  }
+</style>
+<div class="fancy-feature-fiftyOne position-relative mt-150">
+  <div class="container">
+
+    <div class="row text-center d-flex justify-content-center">
+      <div class="col-lg-6 wow fadeInUp ">
+        <h3 class="fw-bold" style="font-size:40px">Add your website</h3>
+        <p class="fs-12 fw-500">Use the main domain (e.g., domain.com) to crawl all pages, or specify a sub-path (e.g., domain.com/help/)or subdomain (e.g., docs.domain.com) to limit the content imported. This helps in AI Chatbot's training to your specific needs.</p>
+      </div>
+    </div>
+    
+  </div>
+</div>
+<div class="user-data-section d-flex align-items-center justify-content-center flex-column position-relative">
+  <div id="content">
+  <div class="form-wrapper position-relative m-auto">
+    {% partial "app/create_form" %}
+  </div>
+  </div>
+  <p class="mt-auto pt-50">Copyright @2022 AI Live chat.</p>
+  <img src="{{'assets/images/assets/ils_11.png'|theme}}" alt="" class="lazy-img illustration-one wow fadeInRight" style="visibility: hidden; animation-name: none;">
+  <img src="{{'assets/images/assets/ils_12.png'|theme}}" alt="" class="lazy-img illustration-two wow fadeInLeft" style="visibility: hidden; animation-name: none;">
+</div>
+
+<script>
+function startPolling() {
+  setInterval(function() {
+    $.request('onCheckUpdate');
+  }, 2000); // Check every 5 seconds
+}
+</script>

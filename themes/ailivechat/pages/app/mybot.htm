@@ -1,0 +1,116 @@
+url = "/app/mybot/:bot_id"
+layout = "app"
+title = "View Bot"
+
+[session]
+security = "user"
+redirect = "app/login"
+checkToken = 0
+==
+<?php
+function onStart()
+{
+    $this['bot_id'] = $this->param('bot_id');
+}
+?>
+==
+<style>
+  .fs-12 {
+  font-size: 12px;
+  }
+  .fs-20 {
+  font-size: 20px;
+  }
+  .user-data-section {
+  min-height: unset;
+  padding: 0;
+  }
+  .user-data-section .form-wrapper:before {
+  content: unset;
+  }
+  .text-left {
+  text-align: left;
+  }
+  .p-10 {
+  padding: 10px;
+  }
+  .rounded-3 {
+  border: solid 1px #00000017
+  }
+  pre[class*=language-] {
+  background: #f5f0f4;
+  }
+  @media screen and (min-width: 992px) {
+  .display-4 {
+  font-size: 3rem;
+  }
+  }
+</style>
+<div class="fancy-feature-fiftyOne position-relative ">
+  <div class="container-fluid">
+    <div id="crawlSuccess">
+      <div class="row text-center d-flex justify-content-center pt-120" style="background: #F6F9FB;">
+        <div class="col-lg-6 wow fadeInUp ">
+          <h3 class="fw-bold" style="font-size:40px">Embed Code</h3>
+          <p class="fs-12 fw-500">To add a floating chat to specific pages, you can either paste (inject) the following code snippet into the &lt;head&gt; section.</p>
+        </div>
+      </div>
+      <div class="user-data-section d-flex align-items-center justify-content-center flex-column position-relative">
+        <div id="content">
+          <div class="form-wrapper position-relative m-auto">
+            <div class="user-data-form p-10 border border-1 rounded-3 bg-light">
+              <div class="row">
+                <div class="col-12">
+                  <div class="input-group-meta">
+                    <pre class="mt-0 rounded-3"><code class="language-markup mt-0" id="codeToCopy">&lt;script 
+     src="https://dippuzen.com/embed.js" 
+     data-param="{{bot_id}}"  
+     defer&gt;
+&lt;/script&gt;
+</code></pre>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <button type="submit" class="btn-twentyTwo w-100 fw-500 tran3s text-uppercase"  id="copyButton" onclick="copyToClipboard()">Copy to Clipboard</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% partial "app/footer" %} 
+        <img src="{{'assets/images/assets/ils_11.png'|theme}}" alt="" class="lazy-img illustration-one wow fadeInRight" style="visibility: hidden; animation-name: none;">
+        <img src="{{'assets/images/assets/ils_12.png'|theme}}" alt="" class="lazy-img illustration-two wow fadeInLeft" style="visibility: hidden; animation-name: none;">
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  function startPolling() {
+    setInterval(function() {
+      $.request('onCheckUpdate');
+    }, 2000); // Check every 5 seconds
+  }
+</script>
+<script>
+function copyToClipboard() {
+  // Get the text from the <code> element
+  var codeToCopy = document.getElementById('codeToCopy').innerText;
+  
+  // Create a temporary textarea element to copy the text
+  var textarea = document.createElement('textarea');
+  textarea.value = codeToCopy;
+  document.body.appendChild(textarea);
+  textarea.select();
+  document.execCommand('copy');
+  document.body.removeChild(textarea);
+  
+  // Change the button text to 'Copied!!'
+  var copyButton = document.getElementById('copyButton');
+  copyButton.textContent = 'Copied!!';
+  
+  // Change the button text back to 'Copy to Clipboard' after 2 seconds
+  setTimeout(function() {
+    copyButton.textContent = 'Copy to Clipboard';
+  }, 1000);
+}
+</script>

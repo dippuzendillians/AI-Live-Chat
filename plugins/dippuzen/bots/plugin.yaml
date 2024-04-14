@@ -1,0 +1,11 @@
+plugin:
+    name: 'dippuzen.bots::lang.plugin.name'
+    description: 'dippuzen.bots::lang.plugin.description'
+    author: Dippuzen
+    icon: oc-icon-android
+    homepage: ''
+navigation:
+    bot:
+        label: 'dippuzen.bots::lang.plugin.name'
+        url: dippuzen/bots/bots
+        icon: icon-android

@@ -1,0 +1,20 @@
+==
+<!DOCTYPE html>
+<html lang="en">
+	{% partial "meta" %}
+	<body>
+		<div class="main-page-wrapper">
+			{% partial "preloader"%}
+
+			{% partial "header" %}
+
+			{% page %}
+
+			{% partial "footer"%}
+
+			{% partial "scripts" %}
+            {% framework %}
+            {% framework extras %}
+		</div>
+	</body>
+</html>

@@ -1,0 +1,12 @@
+list: $/dippuzen/bots/models/bot/columns.yaml
+modelClass: Dippuzen\Bots\Models\Bot
+title: Bots
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+recordsPerPage: 20
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'dippuzen/bots/bots/update/:id'

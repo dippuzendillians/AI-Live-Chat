@@ -1,0 +1,10 @@
+name: Bots
+form: $/dippuzen/bots/models/bot/fields.yaml
+modelClass: Dippuzen\Bots\Models\Bot
+defaultRedirect: dippuzen/bots/bots
+create:
+    redirect: 'dippuzen/bots/bots/update/:id'
+    redirectClose: dippuzen/bots/bots
+update:
+    redirect: dippuzen/bots/bots
+    redirectClose: dippuzen/bots/bots

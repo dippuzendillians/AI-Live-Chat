@@ -1,0 +1,120 @@
+url = "/create"
+layout = "app"
+title = "Create"
+
+[session]
+security = "user"
+redirect = "app/login"
+checkToken = 0
+
+[Update]
+==
+<?php
+use Dippuzen\Bots\Models\Bot as Bot;
+
+function onEnd() {
+       $userId = $this['user']->id;
+}
+
+function onStartCrawl(){
+     Session::put('botId', rand(1000, 9999));
+    $botId = Session::get('botId');
+    $bot = new Bot;
+    $bot->website = input('website');
+    $bot->user_id = Auth::getUser()->id;
+    $bot->crawl_data = '';
+    $bot->bot_id = $botId;
+    $bot->total_pages = 0;
+    $bot->duration = '';
+    $bot->save();
+    $fullurl = 'https://'.input('website');
+    $request = Http::post('https://cighgkudh8.execute-api.eu-west-2.amazonaws.com/prod/crawl/', [
+    'url' => $fullurl,
+    'job_id' => $botId
+    ]);
+
+    if($request->successful()){
+        if(Session::get('crawlSuccess')){
+            Session::forget('crawlSuccess');
+        }
+        return [
+        '#content' => $this->renderPartial('app/crawl_process')
+    ];
+    }
+}
+
+function onCheckUpdate() {
+    $crawlSuccess = Session::get('crawlSuccess');
+    
+    if ($botId = Session::get('botId')){
+        $item = Bot::where('bot_id', $botId)->first();
+        if ($item->crawl_data != '' && !$crawlSuccess) {
+            Session::put('crawlSuccess', true);
+            return [
+                '#crawlSuccess' => $this->renderPartial('app/crawl_success')
+            ];
+        }
+    }
+}
+?>
+==
+<style>
+  .fs-12 {
+  font-size: 12px;
+  }
+    .fs-20 {
+  font-size: 20px;
+  }
+  .user-data-section {
+  min-height: unset;
+  padding: 0;
+  }
+  .user-data-section .form-wrapper:before {
+  content: unset;
+  }
+  .user-data-section .form-wrapper {
+    width: 100%;
+    min-width: 700px;
+  }
+  .text-left {
+  text-align: left;
+  }
+  .p-10 {
+  padding: 10px;
+  }
+  .rounded-3 {
+  border: solid 1px #00000017
+  }
+  @media screen and (min-width: 992px) {
+  .display-4 {
+  font-size: 3rem;
+  }
+  }
+</style>
+<div class="fancy-feature-fiftyOne position-relative ">
+  <div class="container-fluid">
+    <div id="crawlSuccess">
+      <div class="row text-center d-flex justify-content-center pt-120" style="background: #F6F9FB;">
+        <div class="col-lg-6 wow fadeInUp ">
+          <h3 class="fw-bold" style="font-size:40px">Add your website</h3>
+          <p class="fs-12 fw-500">Use the main domain (e.g., domain.com) to crawl all pages, or specify a sub-path (e.g., domain.com/help/)or subdomain (e.g., docs.domain.com) to limit the content imported. This helps in AI Chatbot's response to your specific needs.</p>
+        </div>
+      </div>
+      <div class="user-data-section d-flex align-items-center justify-content-center flex-column position-relative">
+        <div id="content">
+          <div class="form-wrapper position-relative m-auto"> {% partial "app/create_form" %} </div>
+        </div>
+        {% partial "app/footer" %} 
+        <img src="{{'assets/images/assets/ils_11.png'|theme}}" alt="" class="lazy-img illustration-one wow fadeInRight" style="visibility: hidden; animation-name: none;">
+        <img src="{{'assets/images/assets/ils_12.png'|theme}}" alt="" class="lazy-img illustration-two wow fadeInLeft" style="visibility: hidden; animation-name: none;">
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  function startPolling() {
+    setInterval(function() {
+      $.request('onCheckUpdate');
+    }, 2000); // Check every 5 seconds
+  }
+</script>
